@@ -83,10 +83,10 @@ const db = mongoose.connect(DB_URL, {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true
-}).then(res => {
-    // Start the server
-    app.listen(PORT, () => {
-        console.log(`Server listening at http://localhost:${PORT}`)
-    });
-})
+}).then(res => res)
     .catch(err => console.log(err));
+
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server listening at http://localhost:${PORT}`)
+});
