@@ -1,6 +1,6 @@
 const express = require('express'); 								// https://www.npmjs.com/package/express
 const log4js = require('log4js');                                   // https://www.npmjs.com/package/log4js
-const session = require('express-session');							// https://www.npmjs.com/package/express-session
+const session = require('cookie-session');							// https://www.npmjs.com/package/cookie-session
 const passport = require('passport');								// https://www.npmjs.com/package/passport
 const WebAppStrategy = require('ibmcloud-appid').WebAppStrategy;	// https://www.npmjs.com/package/ibmcloud-appid
 const mongoose = require('mongoose');
@@ -38,7 +38,7 @@ passport.use(new WebAppStrategy({
    clientId: process.env.clientId,
    secret: process.env.secret,
    oauthServerUrl: process.env.oauthServerUrl,
-   redirectUri: "http://localhost:8080/appid/callback"
+   redirectUri: `http://localhost:${PORT}/appid/callback`
 }));
 app.use(express.json());
 app.use(express.static('client'));
