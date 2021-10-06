@@ -4,22 +4,32 @@ require('dotenv').config();
 
 const urlRouter = require('./routes/url.routes');
 
+// Get the port from the environment variables
 const PORT = process.env.PORT || 8080;
-const DB_URL = process.env.DB_URL || 'mongodb://localhost:27017/db';
 
-const db = mongoose.connect(DB_URL, {
-    useCreateIndex: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-}).then(res => res)
-.catch(err => console.log(err));
+// Get database credentials from environment variables
+const DB_USER = process.env.DB_USER;
+const DB_PASS = process.env.DB_PASS;
 
+// Define the database URL
+const DB_URL = `mongodb+srv://${DB_USER}:${DB_PASS}@sandbox.dn8da.mongodb.net/Url?retryWrites=true&w=majority`
+
+// Create the express app
 const app = express();
 
 app.use(express.json());
 app.use(express.static('client'));
 app.use('/url', urlRouter);
 
-app.listen(PORT, () => {
-    console.log(`Server listening at http://localhost:${PORT}`)
-});
+// Connect to the database
+const db = mongoose.connect(DB_URL, {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(res => {
+    // Start the server
+    app.listen(PORT, () => {
+        console.log(`Server listening at http://localhost:${PORT}`)
+    });
+})
+    .catch(err => console.log(err));
