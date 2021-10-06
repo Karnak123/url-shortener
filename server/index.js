@@ -38,7 +38,7 @@ passport.use(new WebAppStrategy({
    clientId: process.env.clientId,
    secret: process.env.secret,
    oauthServerUrl: process.env.oauthServerUrl,
-   redirectUri: "http://localhost:8080/appid/callback"
+   redirectUri: `http://localhost:${PORT}/appid/callback`
 }));
 app.use(express.json());
 app.use(express.static('client'));
