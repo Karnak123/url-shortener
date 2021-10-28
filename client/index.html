@@ -9,11 +9,6 @@
 </head>
 
 <body>
-    <section id="userdata">
-        <h3 id="user"></h3>
-        <a href="/appid/login" id="login">Login</a>
-        <a href="/appid/logout" id="logout" style="display: none;">Logout</a>
-    </section>
     <main>
         <h1>MicroUrl</h1>
     </main>
@@ -21,26 +16,13 @@
         <form action="javascript:;" onsubmit="createUrl(displayResponse)">
             <label for="url">Url to shorten:</label>
             <input type="url" name="url" id="url" required>
-            <label for="slug" id="customslug" style="display: none;">Custom micro url:</label>
-            <input type="text" name="slug" id="slug" style="display: none;">
+            <label for="slug">Custom micro url:</label>
+            <input type="text" name="slug" id="slug">
             <input type="submit" value="Create">
         </form>
     </section>
     <section id="response">
     </section>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script>
-        $().ready(() => {
-            $.get("/api/user")
-                .then((resp) => {
-                    $("#user").text("Hello " + resp.user.name);
-                    $("#logout").show();
-                    $("#login").hide();
-                    $("#customslug").show();
-                    $("#slug").show();
-                });
-        });
-    </script>
     <script src="app.js"></script>
 </body>
 
